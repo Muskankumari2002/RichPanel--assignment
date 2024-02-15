@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Login to your account</h1>
+        <form id="login-form" action="">
+            <div class="input-field">
+                <label for="email">Email</label>
+                <input type="email" id="email" value="manoj@richpanel.com">
+            </div>
+            <div class="input-field">
+                <label for="password">Password</label>
+                <input type="password" id="password">
+            </div>
+            <div class="checkbox-field">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me" id="remember-me">Remember Me</label>
+            </div>
+            <button type="submit" onSubmit="window.location.assign('connect.html');">Login</button>
+        </form>
+        <p>New to MyApp?<a href="register.html">Sign Up</a></p>
+    </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCWI4AqeywmVzOfkt9I0dUSYx2IP1nmZLc",
+          authDomain: "richpanel-d5328.firebaseapp.com",
+          projectId: "richpanel-d5328",
+          storageBucket: "richpanel-d5328.appspot.com",
+          messagingSenderId: "749640558220",
+          appId: "1:749640558220:web:c26ec32ac49966e0b1bda9"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        const auth = getAuth(app);
+
+        // Login form
+        const loginForm = document.getElementById("login-form");
+    
+        // Handle form submission
+        loginForm.addEventListener("submit", function(event) {
+          event.preventDefault();
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+    
+          // Sign in with email and password
+          signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              // User signed in successfully
+              console.log("User signed in:", userCredential.user);
+              // Redirect to the dashboard page upon successful sign-in
+              window.location.href = "connect.html";
+            })
+            .catch((error) => {
+              // Handle errors
+              console.error("Sign-in error:", error.message);
+            });
+        });
+      </script>
+</body>
+</html>

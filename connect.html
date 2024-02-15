@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="connect.css">
+</head>
+<body>
+    <div class="container">
+        <div class="facebook-page-integration">
+            <h1>Facebook Page Integration</h1>
+            <button id="connectPage" onclick="window.location.assign('integration_opt.html');">Connect Page</button>
+        </div>
+    </div>
+    <!-- Import Firebase SDK -->
+
+    <script>
+        // Wait for DOM content to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyCWI4AqeywmVzOfkt9I0dUSYx2IP1nmZLc",
+                authDomain: "richpanel-d5328.firebaseapp.com",
+                projectId: "richpanel-d5328",
+                storageBucket: "richpanel-d5328.appspot.com",
+                messagingSenderId: "749640558220",
+                appId: "1:749640558220:web:c26ec32ac49966e0b1bda9"
+            };
+
+            // Initialize Firebase
+            const app = firebase.initializeApp(firebaseConfig);
+            console.log("initialised");
+            const auth = firebase.auth();
+
+            // Create Facebook authentication provider
+            const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
+
+            // Get reference to the sign-in button
+            const facebookSigninButton = document.getElementById('connectPage');
+
+            // Add click event listener to the sign-in button
+            facebookSigninButton.addEventListener('click', () => {
+                // Sign in with Facebook using Firebase
+                auth.signInWithPopup(facebookAuthProvider)
+                .then((result) => {
+                    // Handle successful sign-in
+                    console.log('User signed in:', result.user);
+                    // Redirect to integration_opt.html or perform other actions
+                    window.location.assign('integration_opt.html');
+                })
+                .catch((error) => {
+                    // Handle sign-in errors
+                    console.error('Sign-in error:', error.message);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

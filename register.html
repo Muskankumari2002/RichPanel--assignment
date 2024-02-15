@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="register.css">
+    </head>
+<body>
+    
+    <div class="form-container">
+        <h1>Create Account</h1>
+        <form id="signupForm">
+            <div class="input-field">
+                <label for="name">Name</label>
+                <input type="text" id="name" value="Manoj Kumar">
+            </div>
+            <div class="input-field">
+                <label for="email">Email</label>
+                <input type="email" id="email" value="manoj@richpanel.com">
+            </div>
+            <div class="input-field">
+                <label for="password">Password</label>
+                <input type="password" id="password">
+            </div>
+            <div class="checkbox-field">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me">Remember Me</label>
+            </div>
+            <button type="submit">Signup</button>
+        </form>
+        <p>Already have an account? <a href="index.html">Login</a></p>
+    </div>
+
+    <!-- Your custom JavaScript -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import * as firebase from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyCWI4AqeywmVzOfkt9I0dUSYx2IP1nmZLc",
+            authDomain: "richpanel-d5328.firebaseapp.com",
+            projectId: "richpanel-d5328",
+            storageBucket: "richpanel-d5328.appspot.com",
+            messagingSenderId: "749640558220",
+            appId: "1:749640558220:web:c26ec32ac49966e0b1bda9"
+          };
+        
+          const app = firebase.initializeApp(firebaseConfig);
+
+          const auth = getAuth(app);
+
+  // Example usage: Registering a user
+  const registerForm = document.getElementById("signupForm");
+  registerForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // User registered successfully
+        console.log("User registered:", userCredential.user);
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error("Registration error:", error);
+      });
+  });
+        </script>
+        
+</body>
+</html>
+
